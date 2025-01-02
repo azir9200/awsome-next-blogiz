@@ -1,0 +1,7 @@
+.banner_container {
+  background: url("https://henry.law/wp-content/uploads/2024/10/Screenshot-2024-10-02-at-12.21.37-PM-1-e1727886345720-696x410-c-center.png");
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
