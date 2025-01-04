@@ -10,16 +10,16 @@ export const siteConfig = {
     },
 
     {
+      label: "Services",
+      href: "/service",
+    },
+    {
       label: "About",
       href: "/about",
     },
     {
       label: "Contact",
       href: "/contact",
-    },
-    {
-      label: "Login",
-      href: "/",
     },
   ],
   navMenuItems: [

@@ -1,11 +1,12 @@
 import Banner from "@/src/components/Banner/Banner";
+import InfoPage from "@/src/components/sharedPages/infoPage";
 
 const HomePage = async () => {
   return (
     <>
       <div>
         <Banner />
-        <p>Latest post</p>
+        <InfoPage />
       </div>
     </>
   );

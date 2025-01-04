@@ -1,62 +1,59 @@
+/* eslint-disable import/order */
 "use client";
 
-import { registerUser } from "@/src/components/action/userAction";
+import { useUser } from "@/src/components/context/user.provider";
 import FXForm from "@/src/components/form/FXForm";
 import FXInput from "@/src/components/form/FXInput";
+import { useUserRegistration } from "@/src/components/hook/auth.hook";
+import Loading from "@/src/components/UI/Loading";
+
 import { Button } from "@nextui-org/button";
-import Image from "next/image";
-
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
+import { FieldValues, SubmitHandler } from "react-hook-form";
 
-export type UserData = {
-  username: string;
-  email: string;
-  password: string;
-};
-
-const Register = () => {
+export default function RegisterPage() {
   const router = useRouter();
+  const { setIsLoading: setUserLoading } = useUser();
+
   const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<UserData>();
+    mutate: handleUserRegistration,
+    isPending,
+    isSuccess,
+  } = useUserRegistration();
 
-  const onSubmit = async (data: UserData) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const userData = {
+      ...data,
+    };
 
-    try {
-      const res = await registerUser(data);
-      if (res.success) {
-        alert(res.message);
-        router.push("/login");
+    handleUserRegistration(userData);
+    setUserLoading(true);
+  };
+
+  const RedirectAfterRegistration = () => {
+    const searchParams = useSearchParams();
+    const redirect = searchParams.get("redirect");
+
+    if (!isPending && isSuccess) {
+      if (redirect) {
+        router.push(redirect);
+      } else {
+        router.push("/");
       }
-    } catch (err: any) {
-      console.error(err.message);
-      throw new Error(err.message);
     }
+
+    return isPending && <Loading />;
   };
 
   return (
-    <div className="my-10">
-      <h1 className="text-center text-4xl mb-5">
-        Register <span className="text-accent">Now</span>
-      </h1>
+    <Suspense fallback={<Loading />}>
+      <RedirectAfterRegistration />
 
-      <div className="grid lg:grid-cols-2 ">
-        <div>
-          <Image
-            src="https://res.cloudinary.com/furthered/image/fetch/w_2500,c_fit,q_auto,f_auto/https://cdn.furthered.com/images/product/course/Nv7gBnOGMl-647f476aa3e22.jpg"
-            width={500}
-            height={200}
-            alt="login page"
-            className=" w-fit h-[85%]"
-          />
-        </div>
-
-        <div className="card w-[70%] h-[70%] shadow-xl bg-base-100">
+      <div className="flex w-full min-h-screen flex-col items-center justify-center  bg-cover bg-center px-4">
+        <div className="w-full max-w-md p-6 md:p-8 lg:p-10 rounded-md border backdrop-blur-md bg-black/10 text-center">
+          <h3 className="mb-6 text-4xl font-bold">Sign Up</h3>
           <FXForm
             //! Only for development
             // defaultValues={{
@@ -106,8 +103,6 @@ const Register = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Suspense>
   );
-};
-
-export default Register;
+}

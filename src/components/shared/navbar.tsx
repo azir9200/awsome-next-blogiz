@@ -14,11 +14,17 @@ import { Link } from "@nextui-org/link";
 import { link as linkStyles } from "@nextui-org/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
-
 import { siteConfig } from "@/src/config/site";
+// import { ThemeSwitch } from "@/src/components/UI/theme-switch";
 import NavbarDropdown from "./NavbarDropdown";
+import { useUser } from "../context/user.provider";
+import { ThemeSwitch } from "../theme-switch";
+
+// import { Car } from "lucide-react";
 
 export const Navbar = () => {
+  const { user } = useUser();
+
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -27,6 +33,7 @@ export const Navbar = () => {
             className="flex justify-start items-center gap-1 bg-white text-black rounded-md"
             href="/"
           >
+            {/* <Car className="font-bold" /> */}
             <p className="text-xl rounded-md pr-2 bg-emerald-400 font-bold text-inherit">
               MyCar
             </p>
@@ -55,15 +62,22 @@ export const Navbar = () => {
         justify="end"
       >
         <NavbarItem className="hidden sm:flex gap-2">
-          <NavbarDropdown />
+          <ThemeSwitch />
         </NavbarItem>
 
-        <NavbarItem className="hidden sm:flex gap-2">
-          <Link href="/login">Login</Link>
-        </NavbarItem>
+        {user?.email ? (
+          <NavbarItem className="hidden sm:flex gap-2">
+            <NavbarDropdown />
+          </NavbarItem>
+        ) : (
+          <NavbarItem className="hidden sm:flex gap-2">
+            <Link href="/login">Login</Link>
+          </NavbarItem>
+        )}
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
+        {/* <ThemeSwitch /> */}
         <NavbarMenuToggle />
       </NavbarContent>
 
