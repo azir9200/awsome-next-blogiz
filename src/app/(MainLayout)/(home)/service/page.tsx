@@ -1,19 +1,28 @@
-import BenefitsSection from "@/src/components/sharedPages/benefits";
+import { TServices } from "@/src/types";
 import Container from "@/src/components/UI/Container";
+import { getRecentPosts } from "@/src/components/service/RecentPost";
+import ServiceCard from "@/src/components/service/ServiceCard";
 
 export default async function RecentPosts() {
-  return (
-    <div className="section-title my-8">
-      <h2 className="mb-2 text-center text-2xl">
-        {" "}
-        All Services From Our Company{" "}
-      </h2>
-      <p className="text-center text-3xl py-6">
-        Discover, review, and rate your favorite service. Join a community of
-        car service lovers and share your experiences.
-      </p>
+  const { data: services } = await getRecentPosts();
 
-      <BenefitsSection />
-    </div>
+  return (
+    <Container>
+      <div className="section-title my-8">
+        <h2 className="mb-2 text-center text-2xl">
+          {" "}
+          All Services From Our Company are showing here
+        </h2>
+        <p className="text-center">
+          Discover, review, and rate your favorite service. Join a community of
+          car service lovers and share your experiences
+        </p>
+      </div>
+      <div className="my-8 justify-center gap-10 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {services.map((service: TServices) => (
+          <ServiceCard key={service?._id} service={service} />
+        ))}
+      </div>
+    </Container>
   );
 }

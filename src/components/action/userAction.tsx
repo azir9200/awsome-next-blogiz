@@ -4,15 +4,12 @@ import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
 import { jwtDecode } from "jwt-decode";
 import { redirect } from "next/navigation";
-import axios from "axios";
+
+import axiosInstance from "../lib/AxiosInstance";
 
 export const registerUser = async (userData: FieldValues) => {
   try {
-    const { data } = await axios.post(
-      "https://backend-deply-project-fejosaufu-azir-uddins-projects.vercel.app/api/auth/register",
-      // "http://localhost:5000/api/auth/register",
-      userData
-    );
+    const { data } = await axiosInstance.post("api/auth/register", userData);
 
     if (data.success) {
       (await cookies()).set("accessToken", data?.data?.accessToken);
@@ -28,9 +25,9 @@ export const registerUser = async (userData: FieldValues) => {
 // Login service
 export const loginUser = async (userData: FieldValues) => {
   try {
-    const { data } = await axios.post(
-      "https://backend-deply-project-fejosaufu-azir-uddins-projects.vercel.app/api/auth/login",
-      // "http://localhost:5000/api/auth/login",
+    const { data } = await axiosInstance.post(
+      // "https://backend-deply-project-fejosaufu-azir-uddins-projects.vercel.app/api/auth/login",
+      "/api/auth/login",
       userData
     );
 

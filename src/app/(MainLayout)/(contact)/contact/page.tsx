@@ -42,7 +42,7 @@ const ContactPage = () => {
               <p className="font-medium">
                 Or just reach out manually to{" "}
                 <span className="text-primary dark:text-primary-400">
-                  mycar@service.com
+                  fitness@service.com
                 </span>
               </p>
             </div>

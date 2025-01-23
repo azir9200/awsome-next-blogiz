@@ -35,7 +35,7 @@ export const Navbar = () => {
           >
             {/* <Car className="font-bold" /> */}
             <p className="text-xl rounded-md pr-2 bg-emerald-400 font-bold text-inherit">
-              MyCar
+              Fitness Mind
             </p>
           </NextLink>
         </NavbarBrand>

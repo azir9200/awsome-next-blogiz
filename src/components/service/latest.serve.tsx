@@ -3,7 +3,9 @@ import Link from "next/link";
 
 import ServiceCard from "../service/ServiceCard";
 
-const LatestService = () => {
+import { TServices } from "@/src/types";
+
+const LatestService = ({ services }: { services: TServices[] }) => {
   return (
     <div className="my-10 lg:w-[90%] md:w-[60%] sm:w-[30%]  mx-auto">
       <h1 className="text-4xl text-center">
@@ -13,9 +15,17 @@ const LatestService = () => {
         Discover, review, and rate your favorite books. Join a community of book
         lovers and share your reading experiences.
       </p>
-      <div className="grid lg:grid-cols-3 md:grid-cols-2  my-12 gap-8"></div>
+
+      <div className="grid lg:grid-cols-3 md:grid-cols-2  my-12 gap-8">
+        {services.slice(0, 3).map((service) => (
+          <ServiceCard key={service._id} service={service} />
+        ))}
+      </div>
+
       <div className="my-8 justify-center gap-10 grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
-        <ServiceCard />
+        {services.slice(5, 11).map((service: TServices) => (
+          <ServiceCard key={service?._id} service={service} />
+        ))}
       </div>
 
       <div className="flex justify-center">

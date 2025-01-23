@@ -21,28 +21,28 @@ export const siteConfig = {
       label: "Contact",
       href: "/contact",
     },
-  ],
-  navMenuItems: [
-    {
-      label: "Profile",
-      href: "/profile",
-    },
     {
       label: "Dashboard",
       href: "/dashboard",
     },
+  ],
+  navMenuItems: [
+    {
+      label: "Home",
+      href: "/",
+    },
 
     {
-      label: "Settings",
-      href: "/settings",
+      label: "Services",
+      href: "/service",
     },
     {
-      label: "Help & Feedback",
-      href: "/help-feedback",
+      label: "About",
+      href: "/about",
     },
     {
-      label: "Logout",
-      href: "/logout",
+      label: "Dashboard",
+      href: "/dashboard",
     },
   ],
   links: {

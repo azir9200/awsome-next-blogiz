@@ -1,7 +1,7 @@
 const envConfig = {
   baseApi:
     process.env.NEXT_PUBLIC_BASE_API ||
-    "https://backend-deply-project-fejosaufu-azir-uddins-projects.vercel.app",
+    "https://better-manage-project.vercel.app/api/product",
 };
 
 export default envConfig;
