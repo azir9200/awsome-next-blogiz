@@ -9,7 +9,11 @@ import axiosInstance from "../lib/AxiosInstance";
 
 export const registerUser = async (userData: FieldValues) => {
   try {
-    const { data } = await axiosInstance.post("api/auth/register", userData);
+    const { data } = await axiosInstance.post(
+      "https://better-manage-project.vercel.app/api/auth/register",
+      // "api/auth/register",
+      userData
+    );
 
     if (data.success) {
       (await cookies()).set("accessToken", data?.data?.accessToken);
@@ -26,8 +30,8 @@ export const registerUser = async (userData: FieldValues) => {
 export const loginUser = async (userData: FieldValues) => {
   try {
     const { data } = await axiosInstance.post(
-      // "https://backend-deply-project-fejosaufu-azir-uddins-projects.vercel.app/api/auth/login",
-      "/api/auth/login",
+      "https://better-manage-project.vercel.app/api/auth/login",
+      // "/api/auth/login",
       userData
     );
 

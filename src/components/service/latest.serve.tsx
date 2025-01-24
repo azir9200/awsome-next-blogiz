@@ -16,7 +16,7 @@ const LatestService = ({ services }: { services: TServices[] }) => {
         lovers and share your reading experiences.
       </p>
 
-      <div className="grid lg:grid-cols-3 md:grid-cols-2  my-12 gap-8">
+      {/* <div className="grid lg:grid-cols-3 md:grid-cols-2  my-12 gap-8">
         {services.slice(0, 3).map((service) => (
           <ServiceCard key={service._id} service={service} />
         ))}
@@ -26,7 +26,7 @@ const LatestService = ({ services }: { services: TServices[] }) => {
         {services.slice(5, 11).map((service: TServices) => (
           <ServiceCard key={service?._id} service={service} />
         ))}
-      </div>
+      </div> */}
 
       <div className="flex justify-center">
         <Button className="rounded-md bg-default-900 text-default" size="md">

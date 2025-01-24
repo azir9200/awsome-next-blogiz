@@ -6,7 +6,6 @@ import {
   Image,
   CardFooter,
 } from "@nextui-org/react";
-import { Link } from "@nextui-org/link";
 
 const ServiceCard = (service: any) => {
   const { name, description, price, duration, image, _id } = service?.service;
